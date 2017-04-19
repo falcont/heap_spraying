@@ -1,0 +1,14 @@
+p
+
+  h3 Вопрос
+  = @question.title
+
+p
+  = @question.body
+p
+
+= link_to 'Ответ', new_question_answer_path(@question)
+br
+= link_to 'Назад', questions_path
+
+

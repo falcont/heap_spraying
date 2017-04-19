@@ -1,0 +1,9 @@
+h1 Вопросы
+table
+  thead
+    tr
+      th Заголовок
+  tbody
+    = render @questions
+
+= link_to 'Новый вопрос', new_question_path

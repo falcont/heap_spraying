@@ -1,0 +1,7 @@
+- if resourse.errors.any?
+  div#error_explanation
+    h2 При заполнении формы возникли ошибки:
+
+    ul
+    - resourse.errors.full_messages.each do |message|
+      li = message
