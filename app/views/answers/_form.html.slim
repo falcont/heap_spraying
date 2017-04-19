@@ -1,0 +1,10 @@
+= form_for [@question, answer] do |f|
+  = render 'common/errors', resourse: answer
+
+  div.field
+    = f.label :body, 'Ответ'
+    br
+    = f.text_area :body
+
+  div.actions
+    = f.submit 'Создать' 
