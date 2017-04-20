@@ -1,0 +1,27 @@
+p
+
+  h3 Вопрос:
+  = @question.title
+
+p
+  = @question.body
+
+p
+  = link_to 'Ответ', new_question_answer_path(@question)
+  br
+  = link_to 'Назад', questions_path
+
+  h3 Ответы:
+
+p
+  - if @question.answers.present?
+    - @question.answers.each do |answer|
+       
+      p = answer.body
+
+  - else 
+    p Ответов нет
+
+
+
+
