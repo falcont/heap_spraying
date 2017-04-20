@@ -53,6 +53,7 @@ group :test do
   gem 'shoulda-matchers', :require => false
   gem 'rails-controller-testing'
   gem 'capybara'
+  gem 'launchy'
 end
 
 group :development do
