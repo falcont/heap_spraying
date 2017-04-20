@@ -14,10 +14,14 @@ p
   h3 Ответы:
 
 p
-  - if @question.answers
+  - if @question.answers.present?
     - @question.answers.each do |answer|
        
       p = answer.body
 
   - else 
     p Ответов нет
+
+
+
+
