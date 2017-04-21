@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do 
   describe 'GET #new' do
+    sign_in_user
+    
     before { get :new }
     
     it 'assigns a new question to @question' do 
