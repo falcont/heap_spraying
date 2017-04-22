@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  
   def index
     @questions = Question.all
   end
@@ -14,9 +15,10 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.create(questions_params)
+    @question.user = current_user
 
     if @question.save 
-      redirect_to @question
+      redirect_to @question, notice: 'Вопрос создан!'
     else
       render :new
     end
