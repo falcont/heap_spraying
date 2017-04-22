@@ -7,11 +7,9 @@ feature 'View question' do
 
   scenario 'Anyone can view question' do 
     visit questions_path
-    save_and_open_page
     click_on 'Показать'
 
-    expect(page).to have_content 'Текст вопроса'
-
+    expect(page).to have_content 'Тело вопроса'
   end
 
 end
