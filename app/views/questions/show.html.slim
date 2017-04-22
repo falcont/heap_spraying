@@ -10,6 +10,8 @@ p
   = link_to 'Ответ', new_question_answer_path(@question)
   br
   = link_to 'Назад', questions_path
+  - if current_user && current_user.author?(@question)
+  = link_to 'Удалить', method: :delete, data: { confirm: 'Вы уверены?' }
 
   h3 Ответы:
 

@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [ :new, :create, :destroy ]
+  before_action :set_question, only: [ :show, :destroy ]
   
   def index
     @questions = Question.all
@@ -24,10 +25,21 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def destroy
+    if current_user.author?(@question)
+      @question.destroy
+      redirect_to questions_path, notice: 'Ваш вопрос удалён!'
+    end
+  end
+
   private
 
   def questions_params
     params.require(:question).permit(:title, :body)
+  end
+
+  def set_question
+    @question = Question.find(params[:id])
   end
 
 end
