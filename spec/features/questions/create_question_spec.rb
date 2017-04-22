@@ -17,7 +17,7 @@ feature 'Create question', %q{
     fill_in 'Вопрос', with: 'Question body'
     click_on 'Создать'
 
-    page.should satisfy { |page| page.has_content?('Question title') or page.has_content?('Question bod') }
+    expect(page).to have_content 'Вопрос создан!'
   end
 
   scenario 'Unauthenticated user tries to create question' do
