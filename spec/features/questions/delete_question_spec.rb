@@ -12,12 +12,11 @@ feature 'Delete question', %q{
   scenario 'Authenticated user delete question' do
     sign_in(user)
     visit question_path(question)
-    save_and_open_page
     expect(page).to have_content 'Вопрос_1'
 
     click_on 'Удалить'
 
-    #expect(page).to have_content 'Ваш вопрос удалён!'
+    expect(page).to have_content 'Ваш вопрос удалён!'
     expect(page).to_not have_content 'Вопрос_1'
   end
 
