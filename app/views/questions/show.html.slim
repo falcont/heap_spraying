@@ -17,9 +17,7 @@ p
 
 p
   - if @question.answers.present?
-    - @question.answers.each do |answer|
-       
-      p = answer.body
+    = render @question.answers
 
   - else 
     p Ответов нет
