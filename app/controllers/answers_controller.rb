@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_question, only: [:new, :create]
+  before_action :set_question, only: [:new, :create, :destroy]
   before_action :set_answer, only: :destroy
 
   def new
@@ -19,7 +19,7 @@ class AnswersController < ApplicationController
   def destroy
     if current_user.author?(@answer)
       @answer.destroy
-      redirect_to @answer.question, :notice = 'Ваш ответ удалён.'
+      redirect_to @answer.question, notice: 'Ваш ответ удалён.'
     end
   end
 
@@ -34,6 +34,6 @@ class AnswersController < ApplicationController
   end
 
   def set_answer
-    @answer = Answer.find(params[:id])
+    @answer = @question.answers.find(params[:id])
   end
 end
