@@ -37,6 +37,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'devise'
 gem 'slim-rails'
 gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
@@ -51,6 +52,8 @@ end
 group :test do
   gem 'shoulda-matchers', :require => false
   gem 'rails-controller-testing'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 group :development do

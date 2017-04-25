@@ -1,10 +1,12 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!, only: [ :new, :create, :destroy ]
+  before_action :set_question, only: [ :show, :destroy ]
+  
   def index
     @questions = Question.all
   end
 
   def show
-    @question = Question.find(params[:id])
   end
 
   def new
@@ -12,12 +14,19 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.create(questions_params)
+    @question = current_user.questions.new(questions_params)
 
     if @question.save 
-      redirect_to @question
+      redirect_to @question, notice: 'Вопрос создан!'
     else
       render :new
+    end
+  end
+
+  def destroy
+    if current_user.author?(@question)
+      @question.destroy
+      redirect_to questions_path, notice: 'Ваш вопрос удалён!'
     end
   end
 
@@ -25,6 +34,10 @@ class QuestionsController < ApplicationController
 
   def questions_params
     params.require(:question).permit(:title, :body)
+  end
+
+  def set_question
+    @question = Question.find(params[:id])
   end
 
 end
