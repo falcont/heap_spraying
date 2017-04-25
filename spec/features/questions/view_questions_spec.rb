@@ -10,7 +10,6 @@ feature 'View questions', %q{
 
   scenario 'Anyone can view list of questions' do
     visit questions_path
-    save_and_open_page
     questions.each do |question|
       expect(page).to have_content question.title
     end

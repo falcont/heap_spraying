@@ -7,7 +7,6 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find(params[:id])
   end
 
   def new
@@ -15,8 +14,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.create(questions_params)
-    @question.user = current_user
+    @question = current_user.questions.new(questions_params)
 
     if @question.save 
       redirect_to @question, notice: 'Вопрос создан!'
