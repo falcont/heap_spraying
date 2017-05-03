@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative '../acceptance_helper'
 
 feature 'Create answer', %q{
   In order to create an answer
@@ -25,7 +25,7 @@ feature 'Create answer', %q{
     end
   end
 
-  scenario 'Authenticated user creates answer with invalid attributes'. js: true do
+  scenario 'Authenticated user creates answer with invalid attributes', js: true do
     sign_in(user)
     visit questions_path(question)
     
