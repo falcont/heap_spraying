@@ -1,8 +1,8 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_question, only: [:new, :create, :destroy]
-  before_action :set_answer, only: :destroy
-
+  before_action :set_question
+  before_action :set_answer, only: [:update, :destroy]
+  
   def new
     @answer = Answer.new
   end
@@ -21,6 +21,12 @@ class AnswersController < ApplicationController
       @answer.destroy
       redirect_to @answer.question, notice: 'Ваш ответ удалён.'
     end
+  end
+
+
+  def update
+    @answer.update(answer_params)
+    @question = @answer.question
   end
 
   private
