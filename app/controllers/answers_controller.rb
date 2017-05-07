@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_answer, only: [:update, :destroy, :best]
-  
+ 
   def new
     @answer = Answer.new
   end
@@ -46,6 +46,6 @@ class AnswersController < ApplicationController
   end
 
   def set_answer
-    @answer = Answer.find(params[:id])
+    @answer = current_user.answers.find(params[:id])
   end
 end
