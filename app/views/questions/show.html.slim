@@ -1,17 +1,8 @@
 p
+.question
+  = render 'question_details'
 
-  h3 Вопрос:
-  = @question.title
-
-p
-  = @question.body
-
-p
-  = link_to 'Назад', questions_path
-  - if current_user&.author?(@question)
-    = link_to 'Удалить', @question, method: :delete, data: { confirm: 'Вы уверены?' }
-
-  h3 Ответы:
+h3 Ответы:
 
 p
 
@@ -28,10 +19,10 @@ p
   - if current_user
     = form_for [@question, @question.answers.build], remote:true do |f|
 
-        div.field
-          = f.label :body, 'Новый ответ'
-        .answer-errors
-          br
-          =f.text_area :body
-        div.actions
-          = f.submit 'Ответить'
+      div.field
+        = f.label :body, 'Новый ответ'
+      .answer-errors
+        br
+        =f.text_area :body
+      div.actions
+        = f.submit 'Ответить'
