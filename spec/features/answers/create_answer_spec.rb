@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative '../acceptance_helper'
 
 feature 'Create answer', %q{
   In order to create an answer
@@ -7,15 +7,15 @@ feature 'Create answer', %q{
 } do
 
   given!(:user) { create(:user) }
-  given!(:question) { create(:question) }
+  given!(:question) { create(:question, user: user) }
   given!(:answer) {create(:answer, question: question) }
   #given!(:invalid_answer) {create(:invalid_answer)}
 
   scenario 'Authenticated user creates answer', js: true do
     sign_in(user)
-    visit questions_path(question)
+    visit question_path(question)
     
-    click_on 'Показать'
+    #click_on 'Показать'
     fill_in 'Новый ответ', with: answer.body
     click_on 'Ответить'
 
@@ -25,7 +25,7 @@ feature 'Create answer', %q{
     end
   end
 
-  scenario 'Authenticated user creates answer with invalid attributes'. js: true do
+  scenario 'Authenticated user creates answer with invalid attributes', js: true do
     sign_in(user)
     visit questions_path(question)
     

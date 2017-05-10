@@ -1,13 +1,13 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_question, only: [:new, :create, :destroy]
-  before_action :set_answer, only: :destroy
-
+  before_action :set_answer, only: [:update, :destroy, :best]
+ 
   def new
     @answer = Answer.new
   end
 
   def create
+    @question = Question.find(params[:question_id])
     @answer = @question.answers.new(answer_params)
     @answer.user = current_user
 
@@ -23,6 +23,18 @@ class AnswersController < ApplicationController
     end
   end
 
+
+  def update
+    @answer.update(answer_params)
+    @question = @answer.question
+  end
+
+
+  def best
+    @answer.set_best if current_user.author?(@answer.question)
+  end
+
+
   private
 
   def answer_params
@@ -34,6 +46,6 @@ class AnswersController < ApplicationController
   end
 
   def set_answer
-    @answer = @question.answers.find(params[:id])
+    @answer = current_user.answers.find(params[:id])
   end
 end

@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :create, :destroy ]
-  before_action :set_question, only: [ :show, :destroy ]
+  before_action :set_question, only: [ :show, :destroy, :update ]
   
   def index
     @questions = Question.all
@@ -28,6 +28,10 @@ class QuestionsController < ApplicationController
       @question.destroy
       redirect_to questions_path, notice: 'Ваш вопрос удалён!'
     end
+  end
+
+  def update 
+    @question.update(questions_params) if current_user.author?(@question)
   end
 
   private

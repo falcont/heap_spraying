@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root to: 'questions#index'
 
   resources :questions do 
-    resources :answers, only: [ :new, :create, :destroy ]
+    resources :answers, only: [:create, :update, :destroy], shallow: true do 
+      post 'best', on: :member
+    end
   end
 end

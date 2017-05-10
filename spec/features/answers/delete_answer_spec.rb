@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative '../acceptance_helper'
 
 feature 'Delete answer', %q{
   In order to delete an answer
@@ -7,15 +7,13 @@ feature 'Delete answer', %q{
 } do
 
   given!(:user) { create(:user) }
-  given!(:user2) { create(:user2) }
+  given!(:user2) { create(:user) }
   given!(:question) { create(:question, user: user) }
-  given!(:answer) {create(:answer, question: question) }
+  given!(:answer) {create(:answer, question: question, user: user) }
 
-  scenario 'Author delete answer' do
-    sign_in(user)
-    visit questions_path(question)
-    click_on 'Показать'
-
+  scenario 'Author delete answer', js: true do
+    sign_in user
+    visit question_path(question)
     expect(page).to have_content answer.body
 
     click_on 'Удалить ответ'
@@ -26,14 +24,14 @@ feature 'Delete answer', %q{
 
   scenario 'Authenticated user trying to delete not own answer' do
     sign_in(user2)
-    visit questions_path(question)
-    click_on 'Показать'
+    visit question_path(question)
+    
     expect(page).to_not have_content 'Удалить ответ.'
   end
 
   scenario 'Unauthenticated user trying to delete answer' do
-    visit questions_path(question)
-    click_on 'Показать'
+    visit question_path(question)
+    
     expect(page).to_not have_content 'Удалить ответ.'
   end
 

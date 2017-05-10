@@ -12,7 +12,7 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.2'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.20'
+gem 'pg', '~> 0.19'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -54,8 +54,9 @@ group :test do
   gem 'rails-controller-testing'
   gem 'capybara'
   gem 'launchy'
-  gem 'selenium-webdriver'
+  #gem 'selenium-webdriver'
   gem 'database_cleaner'
+  gem 'capybara-webkit'
 end
 
 group :development do
