@@ -7,8 +7,9 @@ class Answer < ApplicationRecord
   scope :ordered, -> { order('best DESC') }
 
   def set_best
-    question.answers.where(best: true).update_all(best: false)
-    self.update!(best: true)
+    ActiveRecord::Base.transaction do 
+      question.answers.where(best: true).update_all(best: false)
+      self.update!(best: true)
+    end
   end
-
 end
