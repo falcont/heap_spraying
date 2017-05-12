@@ -14,10 +14,10 @@ feature 'Add files to answer', %q{
     visit question_path(question)
   end
 
-  scenario 'User adds file when adds answer' do 
+  scenario 'User adds file when adds answer', js: true do 
     fill_in 'Новый ответ', with: 'Answer text'
     attach_file 'File', "#{Rails.root}/Gemfile"
-    click_on 'Ответть'
+    click_on 'Ответить'
 
     within '.answers' do 
       expect(page).to have_link 'Gemfile', href: '/uploads/attachment/file/1/Gemfile'

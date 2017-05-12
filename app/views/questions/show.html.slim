@@ -22,7 +22,14 @@ p
       div.field
         = f.label :body, 'Новый ответ'
       .answer-errors
-        br
-        =f.text_area :body
+      br
+        =f.text_area :body        
+      p
+        = f.fields_for :attachments, @answer.attachments.build do |a|
+          = a.label :file
+          br
+          = a.file_field :file  
+          br
+
       div.actions
         = f.submit 'Ответить'
