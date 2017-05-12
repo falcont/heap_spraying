@@ -19,7 +19,7 @@ feature 'Add files to question', %q{
     attach_file 'File', "#{Rails.root}/Gemfile"
     click_on 'Создать'
 
-    expect(page).to have_content 'rails_helper.rb.rb'
+    expect(page).to have_link 'Gemfile', href: '/uploads/attachment/file/1/Gemfile'
   end
 
 
