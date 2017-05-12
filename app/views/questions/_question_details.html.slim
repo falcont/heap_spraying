@@ -1,9 +1,11 @@
 h3 Вопрос:
 = @question.title
-
-p
-= @question.body
-
+p= @question.body
+h4 Attachments:
+ul
+  - @question.attachments.each do |a|
+    li= a.file.file.filename 
+    
 p
 - if current_user&.author?(@question)
   = link_to 'Редактировать', '', class: 'edit-question-link', data: { question_id: @question.id }

@@ -16,10 +16,10 @@ feature 'Add files to question', %q{
   scenario 'User adds file when  asks question' do 
     fill_in 'Заголовок', with: 'Question title'
     fill_in 'Вопрос', with: 'Question body'
-    attach_file 'File', '#{Rails.root}/spec/acceptance_helper.rb'
+    attach_file 'File', "#{Rails.root}/Gemfile"
     click_on 'Создать'
 
-    expect(page).to have_content 'acceptance_helper.rb'
+    expect(page).to have_content 'rails_helper.rb.rb'
   end
 
 
