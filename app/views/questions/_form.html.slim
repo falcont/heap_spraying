@@ -12,10 +12,9 @@
     = f.text_area :body
     
     p
-    = f.fields_for :attachments do |a|
-      = a.label :file
-      br
-      = a.file_field :file   
+    = f.fields_for :attachments do |attachment|
+      = render 'attachment_fields', f: attachment
+    = link_to_add_association 'Добавить файл', f, :attachments
   p    
   div.actions
     = f.submit 'Создать'
