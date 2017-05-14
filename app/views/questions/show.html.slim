@@ -17,19 +17,17 @@ p
 
 .answers_form
   - if current_user
-    = form_for [@question, @question.answers.build], remote:true do |f|
+    = form_for [@question, @question.answers.build], remote: true do |f|
 
       div.field
         = f.label :body, 'Новый ответ'
       .answer-errors
       br
         =f.text_area :body        
-      p
-        = f.fields_for :attachments, @answer.attachments.build do |a|
-          = a.label :file
-          br
-          = a.file_field :file  
-          br
+      br
+        = f.fields_for :attachments, @answer.attachments.build do |attachment|
+          = render 'attachment_fields', f: attachment
+          = link_to_add_association 'Добавить файл', f, :attachments
 
       div.actions
         = f.submit 'Ответить'
