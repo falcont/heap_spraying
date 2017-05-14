@@ -2,7 +2,7 @@
   h4 Attachments:
   .attachments-errors
   ul
-    - resource.attachments.each do |a|
+    - resourse.attachments.each do |a|
       li class = "attachment-#{a.id}"
         = link_to a.file.identifier, a.file.url
         - if user_signed_in? && current_user.author?(a.attachable)
