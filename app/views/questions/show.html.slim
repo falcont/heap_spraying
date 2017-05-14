@@ -2,6 +2,10 @@ p
 .question
   = render 'question_details'
 
+p
+.attachments
+  = render 'attachments/attachments', resource: @question
+
 h3 Ответы:
 
 p
@@ -27,6 +31,7 @@ p
       br
         = f.fields_for :attachments, @answer.attachments.build do |attachment|
           = render 'attachment_fields', f: attachment
+          br
           = link_to_add_association 'Добавить файл', f, :attachments
 
       div.actions

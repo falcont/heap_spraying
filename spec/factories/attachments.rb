@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :attachment do
-    file "MyString"
+    file File.new("#{Rails.root}/Gemfile")
+    association :attachable
   end
 end
