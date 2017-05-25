@@ -7,6 +7,12 @@ RSpec.describe Answer, type: :model do
   it { have_db_index :question_id }
   it { have_db_index :user_id }
 
+  it { should have_many :attachments }
+  it { should accept_nested_attributes_for :attachments }
+
+
+
+
   describe 'set best' do 
     let(:user) { create(:user) }
     let(:question) { create(:question, user: user) }

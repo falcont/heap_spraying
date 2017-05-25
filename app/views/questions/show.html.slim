@@ -2,6 +2,10 @@ p
 .question
   = render 'question_details'
 
+p
+.attachments
+  = render 'attachments/attachments', resourse: @question
+
 h3 Ответы:
 
 p
@@ -17,12 +21,18 @@ p
 
 .answers_form
   - if current_user
-    = form_for [@question, @question.answers.build], remote:true do |f|
+    = form_for [@question, @question.answers.build], remote: true do |f|
 
       div.field
         = f.label :body, 'Новый ответ'
       .answer-errors
-        br
-        =f.text_area :body
+      br
+        =f.text_area :body        
+      br
+        = f.fields_for :attachments, @answer.attachments.build do |attachment|
+          = render 'attachment_fields', f: attachment
+          br
+          = link_to_add_association 'Добавить файл', f, :attachments
+
       div.actions
         = f.submit 'Ответить'

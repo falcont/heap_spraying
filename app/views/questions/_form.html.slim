@@ -5,11 +5,17 @@
     = f.label :title, 'Заголовок'
     br
     = f.text_field :title
-
+  p
   div.field
     = f.label :body, 'Вопрос'
     br
     = f.text_area :body
-
+    
+    p
+    = f.fields_for :attachments do |attachment|
+      = render 'attachment_fields', f: attachment
+    br
+    = link_to_add_association 'Добавить файл', f, :attachments
+  p    
   div.actions
     = f.submit 'Создать'

@@ -1,8 +1,6 @@
 h3 Вопрос:
 = @question.title
-
-p
-= @question.body
+p= @question.body
 
 p
 - if current_user&.author?(@question)
