@@ -1,7 +1,17 @@
 .col-lg-12
-  .col-lg-2
-    h3 = @question.title
-    p = @question.body
+
+    h3 class = 'question_title' 
+      = @question.title
+    button class = 'btn btn-default btn-sm vote_up'
+      span class = 'glyphicon glyphicon-chevron-up'
+    
+    span class = 'label label-default vote_rating' 0
+    button class = 'btn btn-default btn-sm vote_down'
+      span class = 'glyphicon glyphicon-chevron-down'
+      
+
+    p 
+      = @question.body
     
     - if current_user&.author?(@question)
       = link_to 'Редактировать', '', class: 'edit-question-link', data: { question_id: @question.id }
@@ -23,11 +33,4 @@
 
 
     = link_to 'Назад', questions_path
-  h3
-    .col-lg-1
-      .vote_up = link_to "&#9650;".html_safe
-    .col-lg-1
-      .vote_rating 0
-    .col-lg-1
-      .vote_down = link_to "&#9660;".html_safe    
-    .col-lg-7
+  
