@@ -5,4 +5,8 @@
   =require twitter-bootstrap-static/sprites
 */
 
-.navbar-brand {float:none;}
+.navbar-brand { float:none; }
+.footer { 
+          position: fixed; 
+          bottom: 0; 
+        }
