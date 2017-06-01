@@ -4,7 +4,8 @@
     button class = 'btn btn-default btn-sm vote_up'
       span class = 'glyphicon glyphicon-chevron-up'
     
-    span class = 'label label-default vote_rating' 0
+    span class = 'label label-default vote_rating'
+      = @question.vote_rating
     button class = 'btn btn-default btn-sm vote_down'
       span class = 'glyphicon glyphicon-chevron-down'
     h3 class = 'question_title' 
