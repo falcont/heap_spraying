@@ -17,6 +17,4 @@ module Votable
   def vote_rating
     self.votes.sum(:rating)
   end
-
-
 end

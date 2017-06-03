@@ -37,6 +37,15 @@ class QuestionsController < ApplicationController
     @question.update(questions_params) if current_user.author?(@question)
   end
 
+  def up_vote
+
+  end
+
+
+  def down_vote
+
+  end 
+
   private
 
   def questions_params
