@@ -8,5 +8,6 @@ question_func = ->
     $(this).hide();
     $('form#edit-question').show();
 
+
 $(document).on('ready', question_func);
 $(document).on('turbolinks:load', question_func);

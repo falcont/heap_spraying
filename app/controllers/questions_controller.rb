@@ -1,6 +1,8 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :create, :destroy ]
   before_action :set_question, only: [ :show, :destroy, :update ]
+
+  include Voted
   
   def index
     @questions = Question.all
@@ -36,15 +38,6 @@ class QuestionsController < ApplicationController
   def update 
     @question.update(questions_params) if current_user.author?(@question)
   end
-
-  def up_vote
-
-  end
-
-
-  def down_vote
-
-  end 
 
   private
 

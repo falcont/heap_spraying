@@ -1,16 +1,6 @@
 .col-lg-12
-
-
-    /button class = 'btn btn-default btn-sm vote_up'
-      /span class = 'glyphicon glyphicon-chevron-up'
     
-    = link_to 'up', up_vote_question_path(@question), class: 'glyphicon glyphicon-chevron-up vote_up', method: :post, remote: true
-    
-    span class = 'label label-default vote_rating'
-      = @question.vote_rating
-    /button class = 'btn btn-default btn-sm vote_down'
-      /span class = 'glyphicon glyphicon-chevron-down'
-    = link_to 'down', down_vote_question_path(@question), class: 'glyphicon glyphicon-chevron-down vote_down', method: :post, remote: true
+    = render @question.votes
 
     h3 class = 'question_title' 
       = @question.title      

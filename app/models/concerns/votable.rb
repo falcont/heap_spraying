@@ -5,12 +5,12 @@ module Votable
     has_many :votes, as: :votable, dependent: :delete_all
   end
 
-  def vote_up
+  def vote_up(user)
     self.votes.build(user: user).positive
   end
 
 
-  def vote_down
+  def vote_down(user)
     self.votes.build(user: user).negative
   end
 
