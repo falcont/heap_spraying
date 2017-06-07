@@ -32,5 +32,9 @@ module Voted
     render json: @votable
   end
 
+  def render_errors
+
+  end
+
 
 end

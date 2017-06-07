@@ -8,6 +8,8 @@ question_func = ->
     $(this).hide();
     $('form#edit-question').show();
 
+$('.vote_up').on 'ajax:succes', (e, data, status, xhr) ->
+  $('vote_rating').html(xhr.responseText)
 
 $(document).on('ready', question_func);
 $(document).on('turbolinks:load', question_func);

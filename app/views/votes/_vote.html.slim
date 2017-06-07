@@ -1,6 +1,8 @@
-= link_to '', vote_up_question_path(@question), class: 'glyphicon glyphicon-chevron-up vote_up', method: :post, remote: true
+.votes
+  = link_to '', vote_up_question_path(@question), class: 'glyphicon glyphicon-chevron-up vote_up', method: :post, data: { type: :json}, remote: true
 
-span class = 'label label-default vote_rating'
-  = @question.vote_rating
 
-= link_to '', vote_down_question_path(@question), class: 'glyphicon glyphicon-chevron-down vote_down', method: :post, remote: true
+  span class = 'label label-default vote_rating'
+    = @question.vote_rating
+
+  = link_to '', vote_down_question_path(@question), class: 'glyphicon glyphicon-chevron-down vote_down', method: :post, remote: true
