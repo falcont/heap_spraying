@@ -9,6 +9,8 @@ module Voted
     respond_to do |format|
       if @votable.vote_up(current_user)
         format.json { render_json }
+      else
+        #format.json { render_errors }
       end
     end
   end
@@ -29,11 +31,11 @@ module Voted
   end
 
   def render_json
-    render json: @votable
+    render json: @votable.vote_rating
   end
 
   def render_errors
-
+    #render json:
   end
 
 

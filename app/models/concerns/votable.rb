@@ -9,7 +9,6 @@ module Votable
     self.votes.build(user: user).positive
   end
 
-
   def vote_down(user)
     self.votes.build(user: user).negative
   end

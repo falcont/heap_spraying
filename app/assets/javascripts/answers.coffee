@@ -9,4 +9,4 @@ $ ->
     answer_id = $(this).data('answerId')
     $('form#edit-answer-' + answer_id).show()
 
-$(document).on('turbolinks:load', ready)
+#$(document).on('turbolinks:load', ready)
