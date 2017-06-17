@@ -6,12 +6,18 @@ module Votable
   end
 
   def vote_up(user)
-    self.votes.build(user: user).positive
+    self.votes.build(user: user).positive!
   end
 
   def vote_down(user)
-    self.votes.build(user: user).negative
+    self.votes.build(user: user).negative!
   end
+
+
+  def cancel_vote(user)
+    self.votes.find_by(user: user)&.delete
+  end
+
 
   def vote_rating
     self.votes.sum(:rating)

@@ -6,3 +6,5 @@
     = @question.vote_rating
 
   = link_to '', vote_down_question_path(@question), class: 'glyphicon glyphicon-chevron-down vote_down', method: :post, remote: true
+
+  = link_to 'cancel', cancel_vote_question_path(@question), class: 'label label-danger',  method: :delete, remote: true

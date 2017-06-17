@@ -9,10 +9,12 @@ question_func = ->
     $('form#edit-question').show();
 
   $('.vote_up').on 'ajax:success', (e, data, status, xhr) ->
+    $('.vote_rating').html(xhr.responseText)
+    console.log(xhr.responseText)
 
-    vote = $.parseJSON(xhr.responseText)
-    console.log(vote)
-    $('.vote_rating').html(vote)
+  $('.vote_down').on 'ajax:success', (e, data, status, xhr) ->
+    $('.vote_rating').html(xhr.responseText)
+    console.log(xhr.responseText)
 
 $(document).on('ready', question_func);
 $(document).on('turbolinks:load', question_func);
