@@ -18,6 +18,9 @@ module Votable
     self.votes.find_by(user: user)&.delete
   end
 
+  def vote_author(user)
+    self.votes.find_by(user: user).present?
+  end
 
   def vote_rating
     self.votes.sum(:rating)

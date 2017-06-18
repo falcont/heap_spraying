@@ -1,10 +1,17 @@
-.votes
-  = link_to '', vote_up_question_path(@question), class: 'glyphicon glyphicon-chevron-up vote_up', method: :post, data: { type: :json }, remote: true
+- if user_signed_in? && !current_user.author?(@question)
+
+  .votes
+    = link_to '', vote_up_question_path(@question), class: 'glyphicon glyphicon-chevron-up vote_up', method: :post, data: { type: :json }, remote: true
 
 
-  span class = 'label label-default vote_rating'
-    = @question.vote_rating
+    span class = 'label label-default vote_rating'
+      = @question.vote_rating
 
-  = link_to '', vote_down_question_path(@question), class: 'glyphicon glyphicon-chevron-down vote_down', method: :post, remote: true
+    = link_to '', vote_down_question_path(@question), class: 'glyphicon glyphicon-chevron-down vote_down', method: :post, remote: true
 
-  = link_to 'cancel', cancel_vote_question_path(@question), class: 'label label-danger',  method: :delete, remote: true
+    - if @question.vote_author(current_user)
+      = link_to 'cancel', cancel_vote_question_path(@question), class: 'label label-danger', method: :delete, remote: true
+- else
+  .votes
+    span class = 'label label-default vote_rating'
+      = @question.vote_rating    
