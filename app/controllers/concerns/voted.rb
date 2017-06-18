@@ -7,18 +7,22 @@ module Voted
 
   def vote_up
     respond_to do |format|
-      if @votable.vote_up(current_user) && !current_user.author?(@votable)        
-        format.json { render_json }
-      #else
-        #format.json { render_errors }
+      until @votable.vote_author(current_user)
+        if @votable.vote_up(current_user) && !current_user.author?(@votable)     
+          format.json { render_json }
+        #else
+          #format.json { render_errors }
+        end
       end
     end
   end
 
   def vote_down
     respond_to do |format|
-      if @votable.vote_down(current_user) && !current_user.author?(@votable)
-        format.json { render_json }
+      until @votable.vote_author(current_user)
+        if @votable.vote_down(current_user) && !current_user.author?(@votable)
+          format.json { render_json }
+        end
       end
     end
   end
