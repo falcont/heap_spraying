@@ -8,16 +8,16 @@ question_func = ->
     $(this).hide();
     $('form#edit-question').show();
 
-  $('cancel_vote').hide();  
-
   $('.vote_up').on 'ajax:success', (e, data, status, xhr) ->
     $('.vote_rating').html(xhr.responseText)
-    $('cancel_vote').show();
     console.log(xhr.responseText)
 
   $('.vote_down').on 'ajax:success', (e, data, status, xhr) ->
     $('.vote_rating').html(xhr.responseText)
-    $('.cancel_vote').show();
+    console.log(xhr.responseText)
+
+  $('cancel_vote').on 'ajax:success', (e, data, status, xhr) ->
+    $('.vote_rating').html(xhr.responseText)
     console.log(xhr.responseText)
 
 $(document).on('ready', question_func);
