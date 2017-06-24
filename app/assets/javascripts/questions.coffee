@@ -11,13 +11,16 @@ question_func = ->
   $('.vote_up').on 'ajax:success', (e, data, status, xhr) ->
     $('.vote_rating').html(xhr.responseText)
     console.log(xhr.responseText)
+    $('.cancel_vote').show()
 
   $('.vote_down').on 'ajax:success', (e, data, status, xhr) ->
     $('.vote_rating').html(xhr.responseText)
     console.log(xhr.responseText)
+    $('.cancel_vote').show()
 
-  $('cancel_vote').on 'ajax:success', (e, data, status, xhr) ->
+  $('.cancel_vote').on 'ajax:success', (e, data, status, xhr) ->
     $('.vote_rating').html(xhr.responseText)
+    $('.cancel_vote').hide()
     console.log(xhr.responseText)
 
 $(document).on('ready', question_func);

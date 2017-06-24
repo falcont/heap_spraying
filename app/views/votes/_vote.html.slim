@@ -9,8 +9,8 @@
 
     = link_to '', vote_down_question_path(@question), class: 'glyphicon glyphicon-chevron-down vote_down', method: :post, remote: true
 
-    - if @question.vote_author(current_user)
-      = link_to 'cancel', cancel_vote_question_path(@question), class: 'label label-danger cancel_vote', method: :delete, remote: true
+    - cancel_show = @question.vote_author(current_user) ? 'inline' : 'none'
+    = link_to 'cancel', cancel_vote_question_path(@question), class: 'label label-danger cancel_vote', method: :delete, remote: true, style: "display: #{cancel_show}"
 - else
   .votes
     span class = 'label label-default vote_rating'
