@@ -23,5 +23,10 @@ question_func = ->
     $('.cancel_vote').hide()
     console.log(xhr.responseText)
 
+  .bind 'ajax:error', (e, xhr, status, error) ->
+    $('.question-errors').html(xhr.responseText)
+    console.log(xhr.responseText)
+    
+
 $(document).on('ready', question_func);
 $(document).on('turbolinks:load', question_func);

@@ -7,22 +7,24 @@ module Voted
 
   def vote_up
     respond_to do |format|
-      until @votable.vote_author(current_user)
+      if !@votable.vote_author(current_user)
         if @votable.vote_up(current_user) && !current_user.author?(@votable)     
           format.json { render_json }
-        #else
-          #format.json { render_errors }
         end
+      else
+        format.json { render_errors }
       end
     end
   end
 
   def vote_down
     respond_to do |format|
-      until @votable.vote_author(current_user)
-        if @votable.vote_down(current_user) && !current_user.author?(@votable)
+      if !@votable.vote_author(current_user)
+        if @votable.vote_down(current_user) && !current_user.author?(@votable)     
           format.json { render_json }
         end
+      else
+        format.json { render_errors }
       end
     end
   end
@@ -48,7 +50,7 @@ module Voted
   end
 
   def render_errors
-    #render json:
+    render json: @votable, status: :unprocessable_entity
   end
 
 

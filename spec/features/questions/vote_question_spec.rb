@@ -34,15 +34,17 @@ feature 'Vote for the question', %q{
 
       scenario 'double voting', js: true do 
         within '.question' do 
-          find(:css, 'vote_up').click
-          find(:css, 'vote_up').click
+          find(:css, '.vote_up').click
+          find(:css, '.vote_up').click
         end
-        expect(page).to have_content 'You can\'t vote twice'
+        within '.vote_rating' do
+          expect(page).to have_content '1'
+        end
       end
 
       scenario 'see cancel link after voting', js: true do 
         within '.question' do 
-          find(:css, 'vote_up').click
+          find(:css, '.vote_up').click
           expect(page).to have_link 'cancel'
         end
       end
@@ -57,15 +59,11 @@ feature 'Vote for the question', %q{
         within '.question' do 
           find(:css, '.vote_up').click
           expect(page).to have_content '1'
-          find(:css, '.vote_cancel').click
+          find(:css, '.cancel_vote').click
           expect(page).to have_content '0'
         end
       end
     end
-
-
-
-
   end
 
 end
