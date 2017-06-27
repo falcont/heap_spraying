@@ -1,6 +1,6 @@
 .col-lg-12
     
-    = render partial: 'votes/vote', resource: @question
+    = render partial: 'votes/vote', votable: @question
 
     h3 class = 'question_title' 
       = @question.title      

@@ -1,17 +1,17 @@
-- if user_signed_in? && !current_user.author?(@question)
+- if user_signed_in? && !current_user.author?(votable)
 
   .votes
-    = link_to '', vote_up_question_path(@question), class: 'glyphicon glyphicon-chevron-up vote_up', method: :post, data: { type: :json }, remote: true
+    = link_to '', polymorphic_path(votable, action: :vote_up), class: 'glyphicon glyphicon-chevron-up vote_up', method: :post, data: { type: :json }, remote: true
 
 
     span class = 'label label-default vote_rating'
-      = @question.vote_rating
+      = votable.vote_rating
 
-    = link_to '', vote_down_question_path(@question), class: 'glyphicon glyphicon-chevron-down vote_down', method: :post, remote: true
+    = link_to '', polymorphic_path(votable, action: :vote_down), class: 'glyphicon glyphicon-chevron-down vote_down', method: :post, remote: true
 
-    - cancel_show = @question.vote_author(current_user) ? 'inline' : 'none'
-    = link_to 'cancel', cancel_vote_question_path(@question), class: 'label label-danger cancel_vote', method: :delete, remote: true, style: "display: #{cancel_show}"
+    - cancel_show = votable.vote_author(current_user) ? 'inline' : 'none'
+    = link_to 'cancel', polymorphic_path(votable, action: :cancel_vote), class: 'label label-danger cancel_vote', method: :delete, remote: true, style: "display: #{cancel_show}"
 - else
   .votes
     span class = 'label label-default vote_rating'
-      = @question.vote_rating    
+      = votable.vote_rating    
