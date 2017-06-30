@@ -8,25 +8,19 @@ question_func = ->
     $(this).hide();
     $('form#edit-question').show();
 
-  $('.vote_up').on 'ajax:success', (e, data, status, xhr) ->
-    $('.vote_rating').html(xhr.responseText)
+  $('.question_vote_up, .question_vote_down').on 'ajax:success', (e, data, status, xhr) ->
+    $('.question_vote_rating').html(xhr.responseText)
     console.log(xhr.responseText)
-    $('.cancel_vote').show()
-
-  $('.vote_down').on 'ajax:success', (e, data, status, xhr) ->
-    $('.vote_rating').html(xhr.responseText)
-    console.log(xhr.responseText)
-    $('.cancel_vote').show()
-
-  $('.cancel_vote').on 'ajax:success', (e, data, status, xhr) ->
-    $('.vote_rating').html(xhr.responseText)
-    $('.cancel_vote').hide()
-    console.log(xhr.responseText)
+    $('.question_cancel_vote').show()
 
   .bind 'ajax:error', (e, xhr, status, error) ->
-    $('.question-errors').html(xhr.responseText)
+    $('.question_vote_errors').html(xhr.responseText)
     console.log(xhr.responseText)
-    
+
+  $('.question_cancel_vote').on 'ajax:success', (e, data, status, xhr) ->
+    $('.question_vote_rating').html(xhr.responseText)
+    $('.question_cancel_vote').hide()
+    console.log(xhr.responseText)
 
 $(document).on('ready', question_func);
 $(document).on('turbolinks:load', question_func);

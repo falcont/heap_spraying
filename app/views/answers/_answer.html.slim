@@ -1,7 +1,7 @@
 - if answer.persisted?
   div class = 'answer-#{answer.id}' 
     
-    = render partial: 'votes/vote', votable: @answer
+    = render 'votes/vote', votable: answer
     = answer.body
 
     .attachments

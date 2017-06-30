@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :questions, concerns: :votable, shallow: true do 
-    resources :answers, conserns: :votable, only: [:create, :update, :destroy], shallow: true do 
+    resources :answers, concerns: :votable, only: [:create, :update, :destroy] do 
       post 'best', on: :member
     end
   end
