@@ -15,7 +15,7 @@ answer_func = ->
     $('.answer_cancel_vote').show()
 
   .bind 'ajax:error', (e, xhr, status, error) ->
-    $('.answer_vote_errors').html(xhr.responseText)
+    $('.answer_vote_errors').html("<div class='alert alert-danger alert-dismissable fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a><strong>You can't vote twice!</strong></div>").fadeOut(3000);
     console.log(xhr.responseText)
 
   $('.answer_cancel_vote').on 'ajax:success', (e, data, status, xhr) ->

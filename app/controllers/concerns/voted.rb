@@ -47,10 +47,12 @@ module Voted
 
   def render_json
     render json: @votable.vote_rating
+    #render json: @vote.as_json.merge(rating: @votable.vote_rating) - с этим что-то не получилось, видимо, не уловил.
   end
 
   def render_errors
-    render json: @votable, status: :unprocessable_entity
+    render json: @votable.errors.full_messages, status: :unprocessable_entity
+
   end
 
 

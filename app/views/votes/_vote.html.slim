@@ -1,5 +1,6 @@
 - if user_signed_in? && !current_user.author?(votable)
   - type = votable.model_name.to_s.downcase
+
   .votes
     = link_to '', polymorphic_path(votable, action: :vote_up), class: "glyphicon glyphicon-chevron-up #{type}_vote_up", method: :post, data: { type: :json }, remote: true
 

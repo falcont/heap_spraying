@@ -24,7 +24,7 @@ feature 'Vote for the answer', %q{
       scenario 'positive voting', js: true do 
         within '.answers' do 
           expect(page).to have_content '0'
-          find(:css, '.vote_up').click
+          find(:css, '.answer_vote_up').click
           expect(page).to have_content '1'
         end
       end
@@ -32,24 +32,24 @@ feature 'Vote for the answer', %q{
       scenario 'negative voting', js: true do 
         within '.answers' do 
           expect(page).to have_content '0'
-          find(:css, '.vote_down').click
+          find(:css, '.answer_vote_down').click
           expect(page).to have_content '-1'
         end
       end
 
       scenario 'double voting', js: true do 
         within '.answers' do 
-          find(:css, '.vote_up').click
-          find(:css, '.vote_up').click
+          find(:css, '.answer_vote_up').click
+          find(:css, '.answer_vote_up').click
         end
-        within '.vote_rating' do
+        within '.answer_vote_rating' do
           expect(page).to have_content '1'
         end
       end
 
       scenario 'see cancel link after voting', js: true do 
         within '.answers' do 
-          find(:css, '.vote_up').click
+          find(:css, '.answer_vote_up').click
           expect(page).to have_link 'cancel'
         end
       end
@@ -62,9 +62,9 @@ feature 'Vote for the answer', %q{
 
       scenario 'revoting', js: true do 
         within '.answers' do 
-          find(:css, '.vote_up').click
+          find(:css, '.answer_vote_up').click
           expect(page).to have_content '1'
-          find(:css, '.cancel_vote').click
+          find(:css, '.answer_cancel_vote').click
           expect(page).to have_content '0'
         end
       end
