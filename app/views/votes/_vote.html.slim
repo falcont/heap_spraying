@@ -1,17 +1,17 @@
 - if user_signed_in? && !current_user.author?(votable)
   - type = votable.model_name.to_s.downcase
 
-  .votes
-    = link_to '', polymorphic_path(votable, action: :vote_up), class: "glyphicon glyphicon-chevron-up #{type}_vote_up", method: :post, data: { type: :json }, remote: true
+  .votes id = "votable_#{type}_#{votable.id}"
+    = link_to '', polymorphic_path(votable, action: :vote_up), class: "glyphicon glyphicon-chevron-up #{type}_vote_up", method: :post, remote: true, data: { type: :json, votable_id: "#{votable.id}", votable_type: type }
 
 
-    span class = "label label-default #{type}_vote_rating"
+    span class = "label label-default #{votable.id}_vote_rating"
       = votable.vote_rating
 
-    = link_to '', polymorphic_path(votable, action: :vote_down), class: "glyphicon glyphicon-chevron-down #{type}_vote_down", method: :post, remote: true
+    = link_to '', polymorphic_path(votable, action: :vote_down), class: "glyphicon glyphicon-chevron-down #{type}_vote_down", method: :post, remote: true, data: { type: :json, votable_id: "#{votable.id}", votable_type: type }
 
     - cancel_show = votable.vote_author(current_user) ? 'inline' : 'none'
-    = link_to 'cancel', polymorphic_path(votable, action: :cancel_vote), class: "label label-danger #{type}_cancel_vote", method: :delete, remote: true, style: "display: #{cancel_show}"
+    = link_to 'cancel', polymorphic_path(votable, action: :cancel_vote), class: "label label-danger cancel_vote", method: :delete, remote: true, data: { type: :json, votable_id: "#{votable.id}", votable_type: type }, style: "display: #{cancel_show}"
 - else
   .votes
     span class = 'label label-default vote_rating'

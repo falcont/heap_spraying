@@ -9,17 +9,23 @@ question_func = ->
     $('form#edit-question').show();
 
   $('.question_vote_up, .question_vote_down').on 'ajax:success', (e, data, status, xhr) ->
-    $('.question_vote_rating').html(xhr.responseText)
-    console.log(xhr.responseText)
-    $('.question_cancel_vote').show()
+    question = $.parseJSON(xhr.responseText)
+    votable_id = $(this).data('votableId')
+    type = $(this).data('votableType')
+    $(".#{question.id}_vote_rating").html(question.rating)
+    $(".votable_" + type + "_" + votable_id + ".cancel_vote").show()
 
   .bind 'ajax:error', (e, xhr, status, error) ->
+    #$('.question_vote_errors').html(vote.notice)
     $('.question_vote_errors').html("<div class='alert alert-danger alert-dismissable fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a><strong>You can't vote twice!</strong></div>").fadeOut(3000);
     console.log(xhr.responseText)
 
-  $('.question_cancel_vote').on 'ajax:success', (e, data, status, xhr) ->
-    $('.question_vote_rating').html(xhr.responseText)
-    $('.question_cancel_vote').hide()
+  $('.cancel_vote').on 'ajax:success', (e, data, status, xhr) ->
+    question = $.parseJSON(xhr.responseText)
+    votable_id = $(this).data('votableId')
+    type = $(this).data('votableType')
+    $(".#{question.id}_vote_rating").html(question.rating)
+    $("#votable_" + type + "_" + votable_id + ".cancel_vote").hide()
     console.log(xhr.responseText)
 
 $(document).on('ready', question_func);

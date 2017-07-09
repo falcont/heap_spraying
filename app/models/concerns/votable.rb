@@ -26,10 +26,4 @@ module Votable
     self.votes.sum(:rating)
   end
 
-
-  def have_voted(user)
-    
-  end
-
-
 end

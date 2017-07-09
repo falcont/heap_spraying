@@ -8,20 +8,24 @@ answer_func = ->
     $(this).hide()
     answer_id = $(this).data('answerId')
     $('form#edit-answer-' + answer_id).show()
-
+    
   $('.answer_vote_up, .answer_vote_down').on 'ajax:success', (e, data, status, xhr) ->
-    $('.answer_vote_rating').html(xhr.responseText)
-    console.log(xhr.responseText)
-    $('.answer_cancel_vote').show()
+    answer = $.parseJSON(xhr.responseText)
+    votable_id = $(this).data('votableId')
+    type = $(this).data('votableType')
+    $(".#{answer.id}_vote_rating").html(answer.rating)
+    $(".votable_" + type + "_" + votable_id + ".cancel_vote").show()
 
   .bind 'ajax:error', (e, xhr, status, error) ->
-    $('.answer_vote_errors').html("<div class='alert alert-danger alert-dismissable fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a><strong>You can't vote twice!</strong></div>").fadeOut(3000);
-    console.log(xhr.responseText)
+    answer = $.parseJSON(xhr.responseText)
+    $(".#{answer.id}_vote_errors").html("<div class='alert alert-danger alert-dismissable fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a><strong>You can't vote twice!</strong></div>").fadeOut(3000);
 
-  $('.answer_cancel_vote').on 'ajax:success', (e, data, status, xhr) ->
-    $('.answer_vote_rating').html(xhr.responseText)
-    $('.answer_cancel_vote').hide()
-    console.log(xhr.responseText)
+  $(".cancel_vote").on 'ajax:success', (e, data, status, xhr) ->
+    answer = $.parseJSON(xhr.responseText)
+    votable_id = $(this).data('votableId')
+    type = $(this).data('votableType')
+    $(".#{answer.id}_vote_rating").html(answer.rating)
+    $("#votable_" + type + "_" + votable_id + ".cancel_vote").hide()
 
 $(document).on('ready', answer_func);
 $(document).on('turbolinks:load', answer_func);

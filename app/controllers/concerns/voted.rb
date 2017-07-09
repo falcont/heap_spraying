@@ -46,8 +46,8 @@ module Voted
   end
 
   def render_json
-    render json: @votable.vote_rating
-    #render json: @vote.as_json.merge(rating: @votable.vote_rating) - с этим что-то не получилось, видимо, не уловил.
+    #render json: @votable
+    render json: @votable.attributes.merge(rating: @votable.vote_rating, notice: 'Voted!')
   end
 
   def render_errors
