@@ -13,20 +13,17 @@ question_func = ->
     votable_id = $(this).data('votableId')
     type = $(this).data('votableType')
     $(".#{question.id}_vote_rating").html(question.rating)
-    $(".votable_" + type + "_" + votable_id + ".cancel_vote").show()
+    $("#votable_" + type + "_" + votable_id + " .cancel_vote").show()
 
   .bind 'ajax:error', (e, xhr, status, error) ->
-    #$('.question_vote_errors').html(vote.notice)
-    $('.question_vote_errors').html("<div class='alert alert-danger alert-dismissable fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a><strong>You can't vote twice!</strong></div>").fadeOut(3000);
-    console.log(xhr.responseText)
+    $('.question_vote_errors').html(xhr.responseText)
 
   $('.cancel_vote').on 'ajax:success', (e, data, status, xhr) ->
     question = $.parseJSON(xhr.responseText)
     votable_id = $(this).data('votableId')
     type = $(this).data('votableType')
     $(".#{question.id}_vote_rating").html(question.rating)
-    $("#votable_" + type + "_" + votable_id + ".cancel_vote").hide()
-    console.log(xhr.responseText)
+    $("#votable_" + type + "_" + votable_id + " .cancel_vote").hide()
 
 $(document).on('ready', question_func);
 $(document).on('turbolinks:load', question_func);

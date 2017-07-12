@@ -14,7 +14,7 @@ answer_func = ->
     votable_id = $(this).data('votableId')
     type = $(this).data('votableType')
     $(".#{answer.id}_vote_rating").html(answer.rating)
-    $(".votable_" + type + "_" + votable_id + ".cancel_vote").show()
+    $("#votable_" + type + "_" + votable_id + " .cancel_vote").show()
 
   .bind 'ajax:error', (e, xhr, status, error) ->
     answer = $.parseJSON(xhr.responseText)
@@ -25,7 +25,7 @@ answer_func = ->
     votable_id = $(this).data('votableId')
     type = $(this).data('votableType')
     $(".#{answer.id}_vote_rating").html(answer.rating)
-    $("#votable_" + type + "_" + votable_id + ".cancel_vote").hide()
+    $("#votable_" + type + "_" + votable_id + " .cancel_vote").hide()
 
 $(document).on('ready', answer_func);
 $(document).on('turbolinks:load', answer_func);

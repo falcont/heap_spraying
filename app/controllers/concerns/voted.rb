@@ -47,12 +47,12 @@ module Voted
 
   def render_json
     #render json: @votable
-    render json: @votable.attributes.merge(rating: @votable.vote_rating, notice: 'Voted!')
+    render json: @votable.as_json.merge(rating: @votable.vote_rating, notice: 'Voted!')
   end
 
   def render_errors
-    render json: @votable.errors.full_messages, status: :unprocessable_entity
-
+    #render json: @votable.errors.full_messages, status: :unprocessable_entity
+    head :forbidden
   end
 
 
