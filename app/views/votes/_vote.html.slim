@@ -10,7 +10,7 @@
 
     = link_to '', polymorphic_path(votable, action: :vote_down), class: "glyphicon glyphicon-chevron-down #{type}_vote_down", method: :post, remote: true, data: { type: :json, votable_id: "#{votable.id}", votable_type: type }
 
-    - cancel_show = votable.vote_author(current_user) ? 'inline' : 'none'
+    - cancel_show = votable.voted?(current_user) ? 'inline' : 'none'
     = link_to 'cancel', polymorphic_path(votable, action: :cancel_vote), class: "label label-danger cancel_vote", method: :delete, remote: true, data: { type: :json, votable_id: "#{votable.id}", votable_type: type }, style: "display: #{cancel_show}"
 - else
   .votes

@@ -18,7 +18,7 @@ module Votable
     self.votes.find_by(user: user)&.delete
   end
 
-  def vote_author(user)
+  def voted?(user)
     self.votes.find_by(user: user).present?
   end
 

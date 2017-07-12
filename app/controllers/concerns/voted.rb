@@ -7,7 +7,7 @@ module Voted
 
   def vote_up
     respond_to do |format|
-      if !@votable.vote_author(current_user)
+      if !@votable.voted?(current_user)
         if @votable.vote_up(current_user) && !current_user.author?(@votable)     
           format.json { render_json }
         end
@@ -19,7 +19,7 @@ module Voted
 
   def vote_down
     respond_to do |format|
-      if !@votable.vote_author(current_user)
+      if !@votable.voted?(current_user)
         if @votable.vote_down(current_user) && !current_user.author?(@votable)     
           format.json { render_json }
         end
