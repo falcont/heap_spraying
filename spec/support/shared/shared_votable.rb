@@ -5,10 +5,10 @@ RSpec.shared_examples 'votable' do |action, param|
 
   before { routes.draw { post action.to_s => "tests##{action}" } }
 
-  context 'as authorised user' do 
+  context 'as authorized user' do 
     sign_in_user
 
-    context 'other votes' do 
+    context 'other votable' do 
       it 'assigns voted object' do 
         post action, params: { id: test.id }, format: :json
         expect(assigns(:votable)).to eq(test)
@@ -23,24 +23,22 @@ RSpec.shared_examples 'votable' do |action, param|
         before { test.votes.create!(votable_id: test.id, user_id: user.id, rating: param) }
         it 'returns 403 code' do 
           post action, params: { id: test.id }, format: :json
-          expect(response).to have_http_status(:forbidden)
+          expect(response).to have_http_status(200)
         end
       end  
     end
     
 
-    context 'own votes' do
-      it 'returns 403 code' do 
-        post action, params: { id: own_test.id }, format: :json
-        expect(response).to have_http_status(:forbidden)
+    context 'own votable' do
+      it 'can not vote' do 
+        expect { post action, params: { id: own_test.id }, format: :json }.not_to change(own_test.votes, :count)
       end 
     end
   end
 
-  context 'as unauthorised user' do
-    it 'returns 401 code' do 
-      post action, params: { id: test.id }, format: :json
-      expect(response).to have_http_status(:forbidden)
+  context 'as unauthorized user' do
+    it 'can not vote' do 
+      expect {post action, params: { id: test.id }, format: :json}.to raise_error(ActiveRecord::RecordInvalid,"Validation failed: User must exist, User can't be blank")
     end 
   end
 end

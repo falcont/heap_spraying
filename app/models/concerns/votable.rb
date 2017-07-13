@@ -13,7 +13,6 @@ module Votable
     self.votes.build(user: user).negative!
   end
 
-
   def cancel_vote(user)
     self.votes.find_by(user: user)&.delete
   end
