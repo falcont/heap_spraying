@@ -22,9 +22,9 @@ feature 'Vote for the answer', %q{
     before { visit question_path(question) }
 
       scenario 'positive voting', js: true do 
-        within '.answers' do 
+        within ".answer-#{answer.id}" do 
           expect(page).to have_content '0'
-          find(:css, '.answer_vote_up').click
+          find(:css, ".answer_vote_up").click
           expect(page).to have_content '1'
         end
       end
