@@ -70,5 +70,4 @@ feature 'Vote for the answer', %q{
       end
     end
   end
-
 end
