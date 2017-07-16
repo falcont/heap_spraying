@@ -11,7 +11,7 @@ feature 'Vote for the answer', %q{
 
   given!(:question) { create(:question, user: user) }
 
-  given!(:answer) { create(:answer, question: question, user: user) }
+  given!(:answer) { create(:answer, question: question, user: user2) }
   given!(:answer2) { create(:answer, question: question, user: user2) }
 
 
@@ -21,50 +21,50 @@ feature 'Vote for the answer', %q{
     context 'rate not own answer' do 
     before { visit question_path(question) }
 
-      scenario 'positive voting', js: true do 
+      scenario 'positive voting', js: true do
         within ".answer-#{answer.id}" do 
           expect(page).to have_content '0'
-          find(:css, ".answer_vote_up").click
+          find(:css, ".vote_up").click
           expect(page).to have_content '1'
         end
       end
 
       scenario 'negative voting', js: true do 
-        within '.answers' do 
+        within ".answer-#{answer.id}" do 
           expect(page).to have_content '0'
-          find(:css, '.answer_vote_down').click
+          find(:css, '.vote_down').click
           expect(page).to have_content '-1'
         end
       end
 
       scenario 'double voting', js: true do 
-        within '.answers' do 
-          find(:css, '.answer_vote_up').click
-          find(:css, '.answer_vote_up').click
+        within ".answer-#{answer.id}" do 
+          find(:css, '.vote_up').click
+          find(:css, '.vote_up').click
         end
-        within '.answer_vote_rating' do
+        within ".answer-#{answer.id}" do
           expect(page).to have_content '1'
         end
       end
 
       scenario 'see cancel link after voting', js: true do 
-        within '.answers' do 
-          find(:css, '.answer_vote_up').click
+        within ".answer-#{answer.id}" do 
+          find(:css, '.vote_up').click
           expect(page).to have_link 'cancel'
         end
       end
 
       scenario 'not to see cancel link before voting', js: true do 
-        within '.answers' do 
+        within ".answer-#{answer.id}" do 
           expect(page).not_to have_content 'cancel'
         end
       end
 
       scenario 'revoting', js: true do 
-        within '.answers' do 
-          find(:css, '.answer_vote_up').click
+        within ".answer-#{answer.id}" do 
+          find(:css, '.vote_up').click
           expect(page).to have_content '1'
-          find(:css, '.answer_cancel_vote').click
+          find(:css, '.cancel_vote').click
           expect(page).to have_content '0'
         end
       end
