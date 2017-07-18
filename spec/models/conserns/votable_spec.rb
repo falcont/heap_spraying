@@ -13,6 +13,8 @@ describe 'Votable'  do
   let(:user) { create(:user) }
   let(:votable) { WithVotable.create(user_id: user.id) }
 
+  
+  
   it '#vote_up' do 
     expect(votable.vote_up(user)).to be_truthy
   end

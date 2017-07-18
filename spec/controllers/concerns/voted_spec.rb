@@ -55,7 +55,7 @@ describe ApplicationController, type: :controller do
 
     context 'as unathorized user' do 
       it 'can not delete vote' do
-        expect {delete :cancel_vote, params: { id: own_test.id }, format: :json}.to raise_error(ActiveRecord::RecordInvalid,"Validation failed: User must exist, User can't be blank")
+        expect { delete :cancel_vote, params: { id: own_test.id }, format: :json}.to raise_error(ActiveRecord::RecordInvalid,"Validation failed: User must exist, User can't be blank")
       end  
     end
   end
