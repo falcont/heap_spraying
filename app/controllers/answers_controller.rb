@@ -1,6 +1,8 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_answer, only: [:update, :destroy, :best]
+
+  include Voted
  
   def new
     @answer = Answer.new
@@ -11,7 +13,7 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answer = @question.answers.new(answer_params)
     @answer.user = current_user
-
+    
     if @answer.save
       redirect_to @answer.question
     end

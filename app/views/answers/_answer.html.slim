@@ -1,5 +1,8 @@
 - if answer.persisted?
   div class = 'answer-#{answer.id}' 
+    
+    = render 'votes/vote', votable: answer
+    .answer_vote_errors
     = answer.body
 
     .attachments
