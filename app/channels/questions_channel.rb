@@ -1,5 +1,5 @@
-class QuestionsCahnnel < ApplicationCable::Channel
-  def do_something(data)
-    Rails.logger.info data
+class QuestionsChannel < ApplicationCable::Channel
+  def follow
+    stream_from "questions"
   end
 end

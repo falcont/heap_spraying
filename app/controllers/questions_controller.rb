@@ -2,6 +2,8 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :create, :destroy ]
   before_action :set_question, only: [ :show, :destroy, :update ]
 
+  after_action :publish_question, only: [:create]
+
   include Voted
   
   def index
@@ -22,7 +24,7 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.new(questions_params)
 
     if @question.save 
-      redirect_to @question, notice: 'Вопрос создан!'
+      redirect_to questions_path, notice: 'Вопрос создан!'
     else
       render :new
     end
@@ -49,4 +51,14 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
   end
 
+  def publish_question
+    return if @question.errors.any?
+    ActionCable.server.broadcast(
+      'questions',
+      ApplicationController.render(
+        partial: 'questions/question',
+        locals: { question: @question }
+      )
+    )
+  end
 end

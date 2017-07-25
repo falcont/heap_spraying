@@ -1,10 +1,22 @@
-$ ->
+question_func = ->
+  questionsList = $(".questions-list")
+
+  $('.edit-question-link').click (e) ->
+    e.preventDefault();
+    $(this).hide();
+    $('form#edit-question').show();
+
+  
+
   App.cable.subscriptions.create('QuestionsChannel', {
     connected: ->
-      console.log 'Connected!'
-      @perform 'do_something', text: 'hello'
+      @perform 'follow'
     ,
 
     received: (data) ->
-      console.log 'received', data
+      questionsList.append data
+
   })
+
+$(document).on('ready', question_func);
+$(document).on('turbolinks:load', question_func);
