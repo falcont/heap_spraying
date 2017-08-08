@@ -1,0 +1,13 @@
+.comments_list
+  - commentable.comments.each do |comment|
+    = comment.body
+
+
+- if user_signed_in?
+  .comment_form
+    = form_for commentable.comments.build, url: polymorphic_path(commentable, action: :comment), remote: true, format: :json do |f|
+      = f.label 'Leave comment'
+      .br
+      = f.text_area :body
+      .br
+      = f.submit 'Comment'
