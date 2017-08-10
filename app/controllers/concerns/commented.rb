@@ -7,7 +7,7 @@ module Commented
 
 
   def comment
-    respond do |format|
+    respond_to do |format|
       @comment = @commentable.comment(:body, current_user)
 
       if @comment.valid?

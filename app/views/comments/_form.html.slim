@@ -1,13 +1,16 @@
 .comments_list
+  p Комментарии:
   - commentable.comments.each do |comment|
-    = comment.body
+    br
+      = comment.body 
+      = comment.user.email
+      = comment.updated_at
 
-
-- if user_signed_in?
-  .comment_form
-    = form_for commentable.comments.build, url: polymorphic_path(commentable, action: :comment), remote: true, format: :json do |f|
-      = f.label 'Leave comment'
-      .br
-      = f.text_area :body
-      .br
-      = f.submit 'Comment'
+= link_to 'Комментировать', class: 'comment_link', style: 'display: inline' if user_signed_in?
+.comment_form
+  = form_for commentable.comments.build, url: polymorphic_path(commentable, action: :comment), remote: true, format: :json, style: 'display: none' do |f|
+    = f.label 'Leave comment'
+    br
+    = f.text_area :body
+    br
+    = f.submit 'Comment'
