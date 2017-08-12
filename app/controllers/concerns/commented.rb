@@ -8,7 +8,7 @@ module Commented
 
   def comment
     respond_to do |format|
-      @comment = @commentable.comment(:body, current_user)
+      @comment = @commentable.comment(params[:comment][:body], current_user)
 
       if @comment.valid?
         format.json { render_json }
