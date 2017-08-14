@@ -3,6 +3,7 @@ class AnswersController < ApplicationController
   before_action :set_answer, only: [:update, :destroy, :best]
 
   include Voted
+  include Commented
  
   def new
     @answer = Answer.new
