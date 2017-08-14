@@ -2,6 +2,8 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_answer, only: [:update, :destroy, :best]
 
+  after_action :publish_answer, only: [:create]
+
   include Voted
   include Commented
  
@@ -51,5 +53,16 @@ class AnswersController < ApplicationController
 
   def set_answer
     @answer = current_user.answers.find(params[:id])
+  end
+
+  def publish_answer
+    return if @answer.errors.any?
+    ActionCable.server.broadcast(
+      'answers',
+      ApplicationController.render(
+        partial: 'answers/answer',
+        locals: { answer: @answer }
+      )
+    )
   end
 end

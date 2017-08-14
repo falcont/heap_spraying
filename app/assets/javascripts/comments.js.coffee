@@ -22,5 +22,18 @@ comments_func = ->
     $('.comment_form').hide()
     $('.comment_link').show()
 
+
+  App.cable.subscriptions.create('CommentsChannel', {
+    connected: ->
+      console.log 'Connected!'
+      @perform 'follow'
+    ,
+
+    received: (data) ->
+      console.log data
+      questionsList.append data
+
+  })
+
 $(document).on('ready', comments_func);
 $(document).on('turbolinks:load', comments_func);
