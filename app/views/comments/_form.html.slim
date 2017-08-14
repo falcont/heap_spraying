@@ -1,15 +1,17 @@
-.comments_list
+- type = commentable.model_name.to_s.downcase
+.comments_list id = "commentable_#{type}_#{commentable.id}"
   p Комментарии:
   - commentable.comments.each do |comment|
     p
       = comment.body 
 
-.comment_link
-  = link_to 'Комментировать' if user_signed_in?
-.comment_form
-  = form_for commentable.comments.build, url: polymorphic_path(commentable, action: :comment), remote: true, format: :json, style: 'display: none' do |f|
-    = f.label 'Leave comment'
+.comment_link id = "commentable_#{type}"
+  - if user_signed_in?
+    = link_to 'Комментировать', '', remote: true, data: { type: :json, commentable_id: "#{commentable.id}", commentable_type: type } 
+.comment_form id = "commentable_#{type}"
+  = form_for commentable.comments.build, url: polymorphic_path(commentable, action: :comment), remote: true, format: :json, data: { type: :json, commentable_id: "#{commentable.id}", commentable_type: type } do |f|
+    = f.label 'Оставить комментарий'
     br
     = f.text_area :body
     br
-    = f.submit 'Comment'
+    = f.submit 'Отправить'
