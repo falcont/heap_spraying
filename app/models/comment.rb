@@ -1,4 +1,6 @@
 class Comment < ApplicationRecord
+  ater_create_commit: publish_comment
+
   belongs_to :commentable, polymorphic: true
   belongs_to :user
 
