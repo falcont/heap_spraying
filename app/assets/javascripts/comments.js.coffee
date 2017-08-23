@@ -1,26 +1,24 @@
 comments_func = ->
 
-  $('.comment_form').hide();
-  $('#commentable_question.comment_link ').click (e) ->
+  $('.comment_form').hide()
+  $('.row').on('click', '.comment_link', (e)->
     e.preventDefault()
-    $(this).hide()
-    $('#commentable_question.comment_form').show()
-
-  $('#commentable_answer.comment_link ').click (e) ->
-    e.preventDefault()
-    $(this).hide()
-    $('#commentable_answer.comment_form').show()
-
+    id = $(this).data('commentableId')
+    type = $(this).data('commentableType')
+    console.log(id)
+    console.log(type)
+    $("#form-#{type}-#{id}").show()
+  );
 
   $('.comment_form').on 'ajax:success', (e, data, status, xhr) ->
     comment = $.parseJSON(xhr.responseText)
     #object = $.parseJSON(xhr.responseText)
-    type = $(this).data('commentableType')
-    console.log(type)
-    console.log(comment)
-    $("#commentable_" + "#{type}" + "_" + ".comments_list").append(comment.body)
-    $('.comment_form').hide()
-    $('.comment_link').show()
+    
+    #console.log(data.commentable_type.toLowerCase())
+    #console.log(comment)
+    $("#commentable_" + "#{comment.commentable_type.toLowerCase()}" + "_" + "#{comment.commentable_id}" + ".comments_list").append(comment.body)
+    #$('.comment_form').hide()
+    #$('.comment_link').show()
 
 
   App.cable.subscriptions.create('CommentsChannel', {
@@ -31,9 +29,9 @@ comments_func = ->
 
     received: (data) ->
       console.log data
+      console.log('AC')
       questionsList.append data
 
   })
 
-$(document).on('ready', comments_func);
 $(document).on('turbolinks:load', comments_func);

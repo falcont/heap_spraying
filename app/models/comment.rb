@@ -1,5 +1,5 @@
 class Comment < ApplicationRecord
-  ater_create_commit: publish_comment
+  after_save :publish_comment, on: :create
 
   belongs_to :commentable, polymorphic: true
   belongs_to :user
@@ -12,7 +12,7 @@ class Comment < ApplicationRecord
   def publish_comment
     ActionCable.server.broadcast(
       'comments',
-      comment: :body
+      self.to_json
     )
   end
 
