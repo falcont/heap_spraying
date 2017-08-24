@@ -1,12 +1,15 @@
 - type = commentable.model_name.to_s.downcase
-.comments_list id = "commentable_#{type}_#{commentable.id}"
+
 - if commentable.comments.any?  
-  p Комментарии:
+  p
+    b Комментарии:
+
+.comments_list id = "comments-list-#{type}-#{commentable.id}"
+
   - commentable.comments.each do |comment|
     p
       = comment.body 
 
-//.comment_link
 - if user_signed_in?
 
   = link_to 'Комментировать', '', remote: true, class: 'comment_link', data: { commentable_id: commentable.id, commentable_type: type }
