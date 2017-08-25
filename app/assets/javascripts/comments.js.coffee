@@ -1,5 +1,6 @@
 comments_func = ->
 
+  $('comments').hide()
   $('.comment_form').hide()
   $('.row').on('click', '.comment_link', (e)->
     e.preventDefault()
@@ -33,6 +34,7 @@ comments_func = ->
       $("#comments-list-#{object.commentable_type.toLowerCase()}-#{object.commentable_id}").append object.body
       $('.comment_form').hide()
       $('.comment_link').show()
+      $('.comments').show()
   })
 
 $(document).on('turbolinks:load', comments_func);

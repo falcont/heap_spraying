@@ -1,14 +1,16 @@
 - type = commentable.model_name.to_s.downcase
 
-- if commentable.comments.any?  
-  p
-    b Комментарии:
-
+.comments
+  p  Комментарии:
 .comments_list id = "comments-list-#{type}-#{commentable.id}"
+- if commentable.comments.any?  
 
   - commentable.comments.each do |comment|
     p
-      = comment.body 
+      = comment.body
+- else
+  p Комментариев нет.
+
 
 - if user_signed_in?
 
