@@ -6,7 +6,6 @@ class CommentsController < ApplicationController
 
   def create
     respond_with(@comment = @parent.comments.create(comment_params.merge(user: current_user)))
-    puts @comment.inspect
   end
 
   private
