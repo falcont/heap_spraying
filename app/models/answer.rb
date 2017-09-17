@@ -1,10 +1,10 @@
 class Answer < ApplicationRecord
   include Votable
-  include Commentable
   
   belongs_to :question
   belongs_to :user
   has_many :attachments, as: :attachable
+  has_many :comments, as: :commentable, dependent: :destroy
 
   validates :body, presence: true
 

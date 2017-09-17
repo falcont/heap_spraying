@@ -5,11 +5,10 @@ class AnswersController < ApplicationController
   after_action :publish_answer, only: [:create]
 
   include Voted
-  include Commented
+  #include Commented
  
   def new
     @answer = Answer.new
-
   end
 
   def create

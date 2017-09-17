@@ -1,11 +1,10 @@
 class Comment < ApplicationRecord
   after_save :publish_comment, on: :create
 
-  belongs_to :commentable, polymorphic: true
+  belongs_to :commentable, polymorphic: true, optional: true
   belongs_to :user
 
   validates :body, :user_id, presence: true
-
 
   private
 
@@ -15,6 +14,4 @@ class Comment < ApplicationRecord
       self.to_json
     )
   end
-
-
 end
