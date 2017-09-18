@@ -10,7 +10,7 @@ question_func = ->
 
   App.cable.subscriptions.create('QuestionsChannel', {
     connected: ->
-      console.log 'Connected!'
+      console.log 'Connected to channel: questions'
       @perform 'follow'
     ,
 
@@ -20,5 +20,4 @@ question_func = ->
 
   })
 
-$(document).on('ready', question_func);
 $(document).on('turbolinks:load', question_func);

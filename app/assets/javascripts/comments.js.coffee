@@ -11,7 +11,7 @@ comments_func = ->
 
   App.cable.subscriptions.create('CommentsChannel', {
     connected: ->
-      console.log 'Connected!'
+      console.log 'Connected to channel: comments'
       @perform 'follow'
     ,
 
