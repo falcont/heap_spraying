@@ -1,6 +1,6 @@
 - type = commentable.model_name.to_s.downcase
 
-.comments
+.comments data = { commentable_type: "#{type}", commentable_id: "#{commentable.id}" }
   p  Комментарии:
 .comments_list id = "comments-list-#{type}-#{commentable.id}"
 - if commentable.comments.any?  

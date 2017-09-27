@@ -8,6 +8,8 @@ answer_func = ->
   questionId = $('.answers').data('questionId')
   channel = '/questions/' + questionId + '/answers'
 
+  # answersList = $(".answers")
+
   App.cable.subscriptions.create({ channel: "AnswersChannel", question_id: questionId } ,  {
     connected: ->
       console.log 'Connected to channel: ' + channel
@@ -16,7 +18,8 @@ answer_func = ->
 
     received: (data) ->
       console.log data
-      questionsList.append data
+      answer = $.parseJSON(data)
+      $(".answers").append answer.body
 
   })
 

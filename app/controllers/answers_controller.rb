@@ -55,7 +55,7 @@ class AnswersController < ApplicationController
   end
 
   def publish_answer
-    return if @answer.errors.any?
-    ActionCable.server.broadcast "questions/#{@answer.question_id}/answers", @answer
+     return if @answer.errors.any?
+     ActionCable.server.broadcast "questions/#{@answer.question.id}/answers", answer: @answer.to_json
   end
 end
