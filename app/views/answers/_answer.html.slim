@@ -2,23 +2,31 @@
   div class = 'answer-#{answer.id}' 
     
     = render 'votes/vote', votable: answer
-    .answer_vote_errors
-    = answer.body
-
-    .attachments
-      = render 'attachments/attachments', resourse: answer
 
     - if current_user&.author?(answer.question)
       - if answer.best
         b Помечен как лучший!
       - else
         = link_to 'Лучший!', best_answer_path(answer), method: :post, remote: true
+        
+    .answer_vote_errors
+
+    = answer.body
+
+    .attachments
+      = render 'attachments/attachments', resourse: answer
+
+
     - if current_user&.author?(answer)
       p= link_to 'Редактировать', '', class: 'edit-answer-link', data: { answer_id: answer.id }
       p= link_to 'Удалить ответ', answer, method: :delete, remote: true, data: { confirm: ' Вы уверены?' }
 
-    p  
+      .answers_comments
+        = render 'comments/form', commentable: answer
 
+    hr
+
+    p  
       = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
         = f.label :body, 'Ответить'
         br

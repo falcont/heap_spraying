@@ -1,6 +1,5 @@
 .col-lg-12
     
-
     = render 'votes/vote', votable: @question
     .question_vote_errors
     h3 class = 'question_title' 
@@ -32,6 +31,9 @@
     - if @question.attachments.present?
       .attachments
         = render 'attachments/attachments', resourse: @question
+
+    .question_comments
+      = render 'comments/form', commentable: @question
 
     hr
   

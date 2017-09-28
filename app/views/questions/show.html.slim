@@ -8,7 +8,7 @@ h3 Ответы:
 
 p
 
-.answers
+.answers data = { question_id: "#{@question.id}"}
   - if @question.answers.present?
     = render @question.answers
 
