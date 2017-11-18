@@ -17,6 +17,19 @@ RSpec.describe User, type: :model do
     it 'user is not author' do 
       expect(user2).to_not eq question.user
     end
+  end
 
+
+  describe '.find_for_oauth' do 
+    let!(:user) { create(:user) }
+    let(:auth) { OmniAuth::AuthHash.new(provider: 'facebook', uid: '123456') }
+
+    context 'user already has authorization' do 
+      it 'returns the user' do 
+        user.authorizations.create(provider: 'facebook', uid: '123456')
+        expect(User.find_for_oauth(auth)).to eq user
+      end
+    end
+    
   end
 end
