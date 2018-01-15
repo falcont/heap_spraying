@@ -26,5 +26,17 @@ feature 'User sign in', %q{
     expect(current_path).to eq new_user_session_path
   end
 
+  scenario 'Sign in with Facebook' do
+    visit new_user_session_path
+    click_on 'Sign in with Facebook'
+    expect(page).to have_content 'Successfully authenticated from Facebook account.'
+  end
+
+  scenario 'Sign in with Twitter' do
+    visit new_user_session_path
+    click_on 'Sign in with Twitter'
+    expect(page).to have_content 'Successfully authenticated from Twitter account.'
+  end
+
 
 end
