@@ -11,10 +11,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # concern :commentable do 
-  #   post :comment, on: :member
-  # end
-
   resources :questions, concerns: [:votable], shallow: true do 
     resources :comments
     resources :answers, concerns: [:votable], only: [:create, :update, :destroy] do 
