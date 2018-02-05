@@ -17,6 +17,7 @@ class User < ApplicationRecord
     return authorization.user if authorization
 
     email = auth.info[:email]
+    
     user = User.where(email: email).first
     
     if user 
