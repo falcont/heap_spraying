@@ -6,6 +6,8 @@ class QuestionsController < ApplicationController
 
   include Voted
   #include Commented
+
+  authorize_resource
   
   def index
     @questions = Question.all
