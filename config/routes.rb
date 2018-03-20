@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
   
   root to: 'questions#index'
 
@@ -10,10 +10,6 @@ Rails.application.routes.draw do
       delete :cancel_vote
     end
   end
-
-  # concern :commentable do 
-  #   post :comment, on: :member
-  # end
 
   resources :questions, concerns: [:votable], shallow: true do 
     resources :comments
