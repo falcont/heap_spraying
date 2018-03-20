@@ -6,6 +6,8 @@ class AnswersController < ApplicationController
 
   include Voted
   #include Commented
+
+  authorize_resource
  
   def new
     @answer = Answer.new
