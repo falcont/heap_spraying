@@ -4,4 +4,6 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exeption|
     redirect_to root_url, alert: exeption.message
   end
+
+  check_autorization
 end
