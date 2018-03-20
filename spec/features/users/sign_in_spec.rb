@@ -1,5 +1,6 @@
 require_relative '../acceptance_helper'
 
+
 feature 'User sign in', %q{
   In order to be able to ask question
   As an user
@@ -26,5 +27,25 @@ feature 'User sign in', %q{
     expect(current_path).to eq new_user_session_path
   end
 
+  scenario 'Sign in with Facebook' do
+    visit new_user_session_path
 
+    mock_auth_hash('facebook')
+
+    click_on 'Sign in with Facebook'
+    expect(page).to have_content 'Successfully authenticated from Facebook account.'
+    page.should have_content("mockuser")
+    page.should have_content("Выйти")
+  end
+
+  scenario 'Sign in with Twitter' do
+    visit new_user_session_path
+
+    mock_auth_hash('twitter')
+
+    click_on 'Sign in with Twitter'
+    expect(page).to have_content 'Successfully authenticated from Twitter account.'
+    page.should have_content("mockuser")
+    page.should have_content("Выйти")
+  end
 end
