@@ -7,7 +7,6 @@ class QuestionsController < ApplicationController
   authorize_resource
 
   include Voted
-  #include Commented
 
   
   
