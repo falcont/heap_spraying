@@ -4,10 +4,12 @@ class QuestionsController < ApplicationController
 
   after_action :publish_question, only: [:create]
 
+  authorize_resource
+
   include Voted
   #include Commented
 
-  authorize_resource
+  
   
   def index
     @questions = Question.all
