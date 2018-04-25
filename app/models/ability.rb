@@ -23,11 +23,11 @@ class Ability
   def user_abilities
     guest_abilities
     can :create, [Question, Answer, Comment]
-    can :update, [Question, Answer, Comment], user: user.id
-    can :vote_up, [Question, Answer]
-    can :vote_down, [Question, Answer]
-    can :cancel_vote, [Question, Answer]
-    can :best, [Answer]
+    can :update, [Question, Answer, Comment], user_id: user.id
+    cannot :vote_up, [Question, Answer], user_id: user.id
+    cannot :vote_down, [Question, Answer],  user_id: user.id
+    can :cancel_vote, [Question, Answer] , user_id: user.id
+    can :best, [Answer], user_id: user.id
   end
 
 end
