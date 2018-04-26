@@ -27,7 +27,7 @@ class Ability
     cannot :vote_up, [Question, Answer], user_id: user.id
     cannot :vote_down, [Question, Answer],  user_id: user.id
     can :cancel_vote, [Question, Answer] , user_id: user.id
-    can :best, [Answer], user_id: user.id
+    can :best, [Answer] { |answer| user.author?(answer.question) }
   end
 
 end
