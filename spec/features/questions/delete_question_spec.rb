@@ -16,7 +16,7 @@ feature 'Delete question', %q{
 
     click_on 'Удалить'
 
-    expect(page).to have_content 'Ваш вопрос удалён!'
+    expect(page).to have_content 'Question was successfully destroyed.'
     expect(page).to_not have_content 'Вопрос_1'
   end
 
