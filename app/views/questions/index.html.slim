@@ -8,5 +8,5 @@ table id = 'questions-list'
   tbody
     = render @questions
 
-
-= link_to 'Новый вопрос', new_question_path, class: 'btn btn-default'
+- if can?(:create, Question)
+  = link_to 'Новый вопрос', new_question_path, class: 'btn btn-default'

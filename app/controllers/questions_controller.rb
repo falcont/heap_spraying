@@ -5,9 +5,15 @@ class QuestionsController < ApplicationController
 
   after_action :publish_question, only: [:create]
 
+
+  authorize_resource
+
+  include Voted
+
   respond_to :html
 
   include Voted
+
   
   def index
     respond_with(@questions = Question.all)
