@@ -46,10 +46,12 @@ gem 'remotipart'
 gem 'cocoon'
 
 gem 'responders', '~> 2.0'
-gem 'omniauth'
+#gem 'omniauth'
+gem 'omniauth-oauth2', '~> 1.3.1'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'cancancan'
+gem 'doorkeeper'
 
 
 group :development, :test do
