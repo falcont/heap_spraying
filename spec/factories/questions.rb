@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :question do
     title 'Вопрос_1'
     body 'Тело вопроса'

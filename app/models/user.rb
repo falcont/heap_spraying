@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :answers, dependent: :destroy
   has_many :authorizations
 
+  scope :all_except, ->(user) { where.not(id: user) }
+
   def author?(obj)
     self.id == obj.user_id
   end
