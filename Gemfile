@@ -52,6 +52,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'cancancan'
 gem 'doorkeeper', '4.2.6'
+gem 'active_model_serializers'
 
 
 group :development, :test do
